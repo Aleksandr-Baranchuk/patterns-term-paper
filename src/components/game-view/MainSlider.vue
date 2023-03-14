@@ -3,7 +3,7 @@
     :slides-per-view="1"
     :centered-slides="false"
     :slides-per-group-skip="1"
-    :speed="1500"
+    :speed="1000"
     class="main-slider w-screen h-screen relative"
     effect="gl"
     :hash-navigation="{
@@ -23,7 +23,9 @@
         alt="image" />
     </swiper-slide>
     <template #container-end>
-      <main-slide-content />
+      <div>
+        <main-slide-content />
+      </div>
     </template>
   </swiper>
 </template>
