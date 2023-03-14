@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "~~/*": ["./*"],
+      "@@/*": ["./*"],
+      "#app": ["./node_modules/@nuxt/bridge/dist/runtime/index"],
+      "#head": ["./node_modules/@nuxt/bridge/dist/runtime/head"],
+      "#imports": [".nuxt/types/imports"]
+    }
+  },
+  "exclude": ["node_modules", ".nuxt", "dist"]
+}
