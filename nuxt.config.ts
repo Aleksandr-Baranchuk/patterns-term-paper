@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: '~/assets/css/app.scss'
   },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon', '@nuxtjs/google-fonts', 'nuxt-lodash'],
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-icon', '@nuxtjs/google-fonts', 'nuxt-lodash', '@vueuse/nuxt'],
   googleFonts: {
     families: {
       Sono: {

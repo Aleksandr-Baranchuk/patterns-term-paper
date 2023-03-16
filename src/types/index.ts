@@ -1,15 +1,3 @@
-interface AnswerItem {
-  text: string;
-  to: string;
-}
-export interface GameViewItem {
-  id: string;
-  content: {
-    title: string;
-    classes?: string | string[];
-    audio?: string;
-  };
+import { gameWindow, answer } from '@prisma/client';
 
-  answers: AnswerItem[];
-  img: string;
-}
+export type GameWindow = gameWindow & { answers: answer[] };

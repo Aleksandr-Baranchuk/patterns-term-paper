@@ -11,21 +11,18 @@
       replaceState: true
     }"
     :modules="modules"
-    @before-init="onBeforeInit"
-    @slide-change="onSlideChange">
+    @before-init="onBeforeInit">
     <swiper-slide
-      v-for="item in gameViewItems"
+      v-for="item in gameWindows"
       :key="item.id"
       :data-hash="item.id">
       <img
         class="swiper-gl-image block w-full"
-        :src="item.img"
+        :src="item.image"
         alt="image" />
     </swiper-slide>
     <template #container-end>
-      <div>
-        <main-slide-content />
-      </div>
+      <main-slide-content />
     </template>
   </swiper>
 </template>
@@ -37,18 +34,15 @@
 
   import SwiperGL from '@/assets/libs/gl/swiper-gl.esm.js';
   import '@/assets/libs/gl/swiper-gl.scss';
-  import gameViewItems from '@/mock/gameViewItems';
   import MainSlideContent from '@/components/game-view/MainSlideContent.vue';
   import useGameStore from '~/store/game';
 
   const gameStore = useGameStore();
   const modules = [SwiperGL, HashNavigation];
+
+  const gameWindows = computed(() => gameStore.gameWindows);
   const onBeforeInit = (swiper: any) => {
     swiper.params.gl.shader = 'polygons-wind';
-  };
-
-  const onSlideChange = (swiper: any) => {
-    gameStore.setActiveSlideIndex(swiper.activeIndex);
   };
 </script>
 
