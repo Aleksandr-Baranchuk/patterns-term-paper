@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+  .btn {
+    line-height: 1.6;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
   .btn:disabled {
     --tw-bg-opacity: 0.9;
   }

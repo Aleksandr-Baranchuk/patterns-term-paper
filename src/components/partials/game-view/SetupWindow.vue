@@ -1,7 +1,8 @@
 <template>
   <img
     class="absolute inset-0 w-full h-full object-cover object-center"
-    src="/assets/images/base-preview.jpg" />
+    src="/assets/images/base-preview.jpg"
+    alt="start-game" />
   <setup-game-form class="relative z-10 p-4" />
 </template>
 

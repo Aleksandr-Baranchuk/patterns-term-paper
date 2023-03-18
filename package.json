@@ -5,15 +5,11 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "yarn make:db && nuxt generate",
+    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
-    "lintfix": "eslint --fix --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
-    "make:db": "rm -f ./prisma/dev.db && npx prisma migrate dev --name init"
-  },
-  "prisma": {
-    "seed": "node  prisma/seed.js"
+    "lintfix": "eslint --fix --ext \".ts,.js,.vue\" --ignore-path .gitignore ."
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -21,8 +17,8 @@
     "@nuxtjs/google-fonts": "^3.0.0",
     "@nuxtjs/tailwindcss": "^6.6.0",
     "@pinia/nuxt": "^0.4.7",
-    "@prisma/client": "4.11.0",
     "@types/node": "^18.15.3",
+    "@types/uuid": "^9.0.1",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
     "daisyui": "^2.51.3",
@@ -35,9 +31,11 @@
     "nuxt-lodash": "^2.4.1",
     "pinia-plugin-persistedstate": "^3.1.0",
     "prettier": "^2.8.4",
-    "prisma": "^4.11.0",
     "sass": "^1.59.2",
     "swiper": "^9.1.0",
     "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }

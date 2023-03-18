@@ -21,6 +21,13 @@
         size="24" />
       <span>{{ infoBarItems.money }}</span>
     </span>
+    <span>
+      <Icon
+        name="game-icons:health-potion"
+        class="text-green-400 mr-1"
+        size="24" />
+      <span>{{ infoBarItems.hpPotion }}</span>
+    </span>
   </header>
 </template>
 
@@ -31,6 +38,7 @@
   const infoBarItems = computed(() => {
     return {
       hp: userStore.hp,
+      hpPotion: userStore.hpPotion,
       mana: userStore.mana,
       money: userStore.money
     };

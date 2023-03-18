@@ -12,12 +12,5 @@
 </template>
 <script setup lang="ts">
   import BaseLoader from '~/components/ui/BaseLoader.vue';
-  import useGameStore from '~/store/game';
   import ActiveWindow from '~/components/partials/game-view/ActiveWindow.vue';
-  const gameStore = useGameStore();
-  const { error } = await gameStore.fetchGameWindows();
-
-  if (error.value) {
-    throw createDefaultError(error);
-  }
 </script>

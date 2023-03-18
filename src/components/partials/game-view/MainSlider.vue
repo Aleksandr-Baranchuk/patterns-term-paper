@@ -1,48 +1,54 @@
 <template>
-  <swiper
-    :slides-per-view="1"
-    :centered-slides="false"
-    :slides-per-group-skip="1"
-    :speed="1000"
-    class="main-slider w-screen h-screen relative"
-    effect="gl"
-    :hash-navigation="{
-      watchState: true,
-      replaceState: true
-    }"
-    :modules="modules"
-    @before-init="onBeforeInit">
-    <swiper-slide
-      v-for="item in gameWindows"
-      :key="item.id"
-      :data-hash="item.id">
-      <img
-        class="swiper-gl-image block w-full"
-        :src="item.image"
-        alt="image" />
-    </swiper-slide>
-    <template #container-end>
-      <main-slide-content />
-    </template>
-  </swiper>
+  <div>
+    <game-toolbar />
+    <swiper
+      :slides-per-view="1"
+      :centered-slides="false"
+      :slides-per-group-skip="1"
+      :speed="1000"
+      class="main-slider w-screen h-screen relative"
+      :modules="modules"
+      effect="gl"
+      @before-init="onBeforeInit"
+      @init="onInit">
+      <swiper-slide
+        v-for="item in gameWindows"
+        :key="item.id">
+        <img
+          class="swiper-gl-image block w-full"
+          :src="item.image"
+          alt="image" />
+      </swiper-slide>
+      <template #container-end>
+        <main-slide-content />
+      </template>
+    </swiper>
+  </div>
 </template>
 
 <script setup lang="ts">
+  import type { Swiper as SwiperClass } from 'swiper/types';
   import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { HashNavigation } from 'swiper';
   import 'swiper/css';
 
   import SwiperGL from '@/assets/libs/gl/swiper-gl.esm.js';
   import '@/assets/libs/gl/swiper-gl.scss';
   import MainSlideContent from '@/components/partials/game-view/MainSlideContent.vue';
   import useGameStore from '~/store/game';
+  import GameToolbar from '~/components/partials/game-view/GameToolbar.vue';
 
   const gameStore = useGameStore();
-  const modules = [SwiperGL, HashNavigation];
+  const modules = [SwiperGL];
 
   const gameWindows = computed(() => gameStore.gameWindows);
   const onBeforeInit = (swiper: any) => {
     swiper.params.gl.shader = 'polygons-wind';
+  };
+
+  const onInit = (swiper: SwiperClass) => {
+    if (swiper.activeIndex !== gameStore.activeSlideIndex) {
+      swiper.slideTo(gameStore.activeSlideIndex);
+    }
   };
 </script>
 

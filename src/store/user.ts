@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
 import useGameStore from '~/store/game';
 import { SERVICE_MESSAGES } from '~/globals';
+import setCountWithMin from '~/utils/setCountWithMin';
 
 const initialState = {
   userName: '',
   hp: 100,
   money: 0,
-  mana: 0
+  mana: 0,
+  hpPotion: 1
 };
 
 const useUserStore = defineStore(
@@ -16,72 +18,64 @@ const useUserStore = defineStore(
     const hp = ref(initialState.hp);
     const money = ref(initialState.money);
     const mana = ref(initialState.mana);
-
-    const router = useRouter();
+    const hpPotion = ref(initialState.hpPotion);
     const gameStore = useGameStore();
     const reset = () => {
       userName.value = initialState.userName;
       hp.value = initialState.hp;
       money.value = initialState.money;
       mana.value = initialState.mana;
+      hpPotion.value = initialState.hpPotion;
     };
 
-    const initGame = async (name: string) => {
+    const initGame = (name: string) => {
       if (!name) {
         throw new Error('User name required!');
       }
       userName.value = name;
-      await router.push({ name: 'game' });
     };
 
-    const addHp = (count: number) => {
+    const setHp = (count: number) => {
       const countHP = count + hp.value;
-      hp.value = countHP > 100 ? 100 : countHP;
-    };
-
-    const minusHp = (count: number) => {
-      const countHP = count - hp.value;
       if (countHP <= 0) {
-        gameStore.gameOver({
+        hp.value = 0;
+
+        gameStore.onGameOver({
           type: 'failure',
-          message: SERVICE_MESSAGES.gameOverFailure
+          text: SERVICE_MESSAGES.gameOverFailure
         });
+
+        return false;
       }
-      hp.value = countHP < 0 ? 100 : countHP;
+      hp.value = countHP > 100 ? 100 : countHP;
+      return true;
     };
 
-    const addMoney = (count: number) => {
-      money.value += count;
+    const setMoney = (count: number) => {
+      money.value = setCountWithMin(count, money);
     };
 
-    const minusMoney = (count: number) => {
-      const countMoney = count - money.value;
-      money.value = countMoney < 0 ? 0 : countMoney;
+    const setMana = (count: number) => {
+      mana.value = setCountWithMin(count, mana);
     };
 
-    const addMana = (count: number) => {
-      money.value += count;
-    };
-
-    const minusMana = (count: number) => {
-      const countMana = count - mana.value;
-      mana.value = countMana < 0 ? 0 : countMana;
+    const setHpPotion = (count: number) => {
+      hpPotion.value = setCountWithMin(count, hpPotion);
     };
 
     return {
       userName,
       hp,
+      hpPotion,
       mana,
       money,
 
       reset,
       initGame,
-      addHp,
-      minusHp,
-      addMana,
-      minusMana,
-      addMoney,
-      minusMoney
+      setHp,
+      setMana,
+      setMoney,
+      setHpPotion
     };
   },
   {

@@ -3,7 +3,7 @@
     <input
       v-model="fieldName"
       type="text"
-      placeholder="Enter Your name"
+      placeholder="Як вас звати герой?"
       required
       class="input input-bordered w-full max-w-xs mb-3" />
     <div class="text-center">

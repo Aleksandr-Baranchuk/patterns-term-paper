@@ -1,54 +1,52 @@
 import { defineStore } from 'pinia';
 import { GameOver, GameWindow } from '~/types';
+import gameWindowsPlot from '~/mock/gameWindowsPlot';
 
-const useGameStore = defineStore('gameStore', () => {
-  const gameWindows = ref<GameWindow[]>([]);
-  const activeSlideId = ref<number>();
-  const route = useRoute();
+const useGameStore = defineStore(
+  'gameStore',
+  () => {
+    const gameWindows = ref<GameWindow[]>(gameWindowsPlot);
+    const activeSlideId = ref<string>('');
+    const gameOverData = ref<GameOver>();
 
-  const activeSlideIndex = computed<number>(() => useFindIndex(gameWindows.value, { id: activeSlideId.value }));
-  const currentGameWindow = computed<GameWindow | Object>(() => {
-    if (!gameWindows.value.length) {
-      return {};
+    const reset = () => {
+      activeSlideId.value = '';
+      gameOverData.value = undefined;
+    };
+
+    const activeSlideIndex = computed<number>(() => useFindIndex(gameWindows.value, { id: activeSlideId.value }));
+    const currentGameWindow = computed<GameWindow>(() => {
+      return gameWindows.value[activeSlideIndex.value] || gameWindows.value[0];
+    });
+    const setActiveSlideId = (gameWindowId?: string) => {
+      if (gameWindowId) {
+        activeSlideId.value = gameWindowId;
+      }
+
+      return activeSlideIndex.value;
+    };
+
+    const onGameOver = (payload: GameOver) => {
+      gameOverData.value = payload;
+    };
+
+    return {
+      activeSlideId,
+      activeSlideIndex,
+      gameWindows,
+      currentGameWindow,
+      gameOverData,
+
+      reset,
+      setActiveSlideId,
+      onGameOver
+    };
+  },
+  {
+    persist: {
+      paths: ['activeSlideId', 'gameOverData']
     }
-    return gameWindows.value[activeSlideIndex.value] || gameWindows.value[0];
-  });
-  const setActiveSlideId = (gameWindowId: number) => {
-    activeSlideId.value = gameWindowId;
-  };
-
-  const fetchGameWindows = async () => {
-    const res = await useFetch<GameWindow[]>('/api/game-windows');
-    if (!res.error.value && res.data.value) {
-      gameWindows.value = res.data.value;
-    }
-    return res;
-  };
-
-  const gameOver = (payload: GameOver) => {
-    console.log(payload);
-  };
-
-  const initGameWindow = () => {
-    if (!gameWindows.value.length) {
-      return;
-    }
-    if (route.hash) {
-      activeSlideId.value = parseInt(route.hash.replace('#', ''));
-      return;
-    }
-    activeSlideId.value = gameWindows.value[0].id;
-  };
-
-  return {
-    gameWindows,
-    currentGameWindow,
-
-    setActiveSlideId,
-    fetchGameWindows,
-    initGameWindow,
-    gameOver
-  };
-});
+  }
+);
 
 export default useGameStore;
