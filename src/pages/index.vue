@@ -1,18 +1,23 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-full p-4 flex-1">
-    <nuxt-img
-      class="absolute inset-0 w-full h-full object-cover object-center"
-      src="/assets/images/base-preview.jpg"
-      fit="cover"
-      quality="80"
-      size="1920"
-      height="1080"
-      preload
-      format="webp" />
-    <div class="relative z-10">
-      <button class="btn btn-primary">Почати гру</button>
-    </div>
+  <div class="flex flex-col items-center justify-center flex-1">
+    <client-only>
+      <template #default>
+        <active-window />
+      </template>
+      <template #fallback>
+        <base-loader class="fixed" />
+      </template>
+    </client-only>
   </div>
 </template>
+<script setup lang="ts">
+  import BaseLoader from '~/components/ui/BaseLoader.vue';
+  import useGameStore from '~/store/game';
+  import ActiveWindow from '~/components/partials/game-view/ActiveWindow.vue';
+  const gameStore = useGameStore();
+  const { error } = await gameStore.fetchGameWindows();
 
-<script setup lang="ts"></script>
+  if (error.value) {
+    throw createDefaultError(error);
+  }
+</script>

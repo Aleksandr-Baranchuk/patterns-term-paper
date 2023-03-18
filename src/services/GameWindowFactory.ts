@@ -1,0 +1,3 @@
+class GameWindowFactory {
+  public activeWindow() {}
+}

@@ -2,7 +2,11 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": [
+      "pinia-plugin-persist",
+      "./src/types"
+    ]
   },
   "typeRoots": [
     "./src/types"
