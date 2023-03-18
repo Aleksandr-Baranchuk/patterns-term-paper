@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { GameWindow } from '~/types';
+import { GameOver, GameWindow } from '~/types';
 
 const useGameStore = defineStore('gameStore', () => {
   const gameWindows = ref<GameWindow[]>([]);
@@ -25,6 +25,10 @@ const useGameStore = defineStore('gameStore', () => {
     return res;
   };
 
+  const gameOver = (payload: GameOver) => {
+    console.log(payload);
+  };
+
   const initGameWindow = () => {
     if (!gameWindows.value.length) {
       return;
@@ -42,7 +46,8 @@ const useGameStore = defineStore('gameStore', () => {
 
     setActiveSlideId,
     fetchGameWindows,
-    initGameWindow
+    initGameWindow,
+    gameOver
   };
 });
 
