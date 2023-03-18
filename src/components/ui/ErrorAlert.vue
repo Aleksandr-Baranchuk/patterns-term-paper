@@ -5,12 +5,14 @@
         <Icon
           name="mdi:alert-circle"
           size="24" />
-        <p>{{ error }}</p>
+        <p>{{ errorMessage }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{ error: any }>();
+  const props = defineProps<{ error: any }>();
+
+  const errorMessage = computed(() => getMessageErrorByResponse(props));
 </script>

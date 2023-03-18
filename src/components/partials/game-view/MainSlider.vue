@@ -34,7 +34,7 @@
 
   import SwiperGL from '@/assets/libs/gl/swiper-gl.esm.js';
   import '@/assets/libs/gl/swiper-gl.scss';
-  import MainSlideContent from '@/components/game-view/MainSlideContent.vue';
+  import MainSlideContent from '@/components/partials/game-view/MainSlideContent.vue';
   import useGameStore from '~/store/game';
 
   const gameStore = useGameStore();

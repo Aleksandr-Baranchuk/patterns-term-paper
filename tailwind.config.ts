@@ -6,5 +6,8 @@ export default {
       sans: ['Sono', 'sans-serif']
     }
   },
+  daisyui: {
+    themes: ['dark']
+  },
   plugins: [daisyui]
 };

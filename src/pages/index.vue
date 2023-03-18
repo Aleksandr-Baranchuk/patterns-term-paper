@@ -1,50 +1,18 @@
 <template>
-  <div>
-    <error-alert
-      v-if="error"
-      :message="error" />
-    <nuxt-error-boundary>
-      <template #default>
-        <client-only>
-          <template #default>
-            <main-slider />
-          </template>
-          <template #fallback>
-            <base-loader class="fixed" />
-          </template>
-        </client-only>
-        <audio
-          ref="audioRef"
-          class="hidden" />
-      </template>
-      <template #error="{ error }">
-        <error-alert :error="error" />
-      </template>
-    </nuxt-error-boundary>
+  <div class="flex flex-col items-center justify-center min-h-full p-4 flex-1">
+    <nuxt-img
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      src="/assets/images/base-preview.jpg"
+      fit="cover"
+      quality="80"
+      size="1920"
+      height="1080"
+      preload
+      format="webp" />
+    <div class="relative z-10">
+      <button class="btn btn-primary">Почати гру</button>
+    </div>
   </div>
 </template>
-<script setup lang="ts">
-  import { useMediaControls } from '@vueuse/core';
-  import MainSlider from '~/components/game-view/MainSlider.vue';
-  import BaseLoader from '~/components/ui/BaseLoader.vue';
-  import useGameStore from '~/store/game';
-  import ErrorAlert from '~/components/ui/ErrorAlert.vue';
-  import { useEventListener } from '#imports';
 
-  const audioRef = ref();
-
-  const gameStore = useGameStore();
-
-  const { error } = await gameStore.fetchGameWindows();
-  const { playing, volume } = useMediaControls(audioRef, {
-    src: '/assets/audio/X2Download.mp3'
-  });
-
-  useEventListener('click', () => {
-    if (!playing.value) {
-      volume.value = 0.3;
-      audioRef.value.play();
-    }
-  });
-  onMounted(gameStore.initGameWindow);
-</script>
+<script setup lang="ts"></script>
