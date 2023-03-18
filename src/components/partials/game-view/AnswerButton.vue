@@ -1,5 +1,6 @@
 <template>
   <button
+    :disabled="disableAnswer"
     class="btn btn-accent max-w-auto h-auto btn-lg"
     @click="onClick">
     {{ text }}
@@ -19,6 +20,23 @@
   const gameStore = useGameStore();
   const userStore = useUserStore();
   const text = usePrepareMessageWithName(computed(() => props.answer.text));
+  const lackOfHpPoint = computed(() => {
+    if (isNil(props.answer.setHpPotion)) {
+      return false;
+    }
+    return userStore.hpPotion + props.answer.setHpPotion < 0;
+  });
+
+  const lackOfMana = computed(() => {
+    if (isNil(props.answer.setMana)) {
+      return false;
+    }
+    return userStore.mana + props.answer.setMana < 0;
+  });
+
+  const disableAnswer = computed(() => {
+    return lackOfHpPoint.value || lackOfMana.value;
+  });
   const onClick = () => {
     const answer = props.answer;
 
@@ -37,10 +55,10 @@
       userStore.setMana(answer.setMana);
     }
     if (!isNil(answer.setMoney)) {
-      userStore.setMana(answer.setMoney);
+      userStore.setMoney(answer.setMoney);
     }
     if (!isNil(answer.setHpPotion)) {
-      userStore.setMana(answer.setHpPotion);
+      userStore.setHpPotion(answer.setHpPotion);
     }
 
     if (!isNil(answer.gameWindowNextId)) {

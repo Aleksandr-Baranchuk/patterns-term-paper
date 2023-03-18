@@ -35,9 +35,22 @@ const useUserStore = defineStore(
       userName.value = name;
     };
 
+    const drinkPotion = () => {
+      if (hpPotion.value > 0) {
+        hpPotion.value -= 1;
+        hp.value += 40;
+      }
+    };
+
     const setHp = (count: number) => {
       const countHP = count + hp.value;
       if (countHP <= 0) {
+        if (hpPotion.value > 0 && confirm('Випти зілля?')) {
+          drinkPotion();
+          setHp(count);
+          return;
+        }
+
         hp.value = 0;
 
         gameStore.onGameOver({
