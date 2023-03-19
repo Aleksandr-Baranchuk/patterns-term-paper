@@ -4,10 +4,11 @@
     :src="activeImage"
     alt="game-over" />
   <div
-    class="relative z-10 p-4 max-w-3xl text-center"
-    :class="contentStyleWithType">
+    class="relative z-10 p-4 max-w-3xl text-center text-white"
+    :class="textStyle">
     <render-messages
       v-if="text"
+      class="text-3xl mb-12 font-bold"
       :messages="text" />
     <button
       class="btn btn-accent"
@@ -27,27 +28,9 @@
 
   const text = computed(() => gameStore.gameOverData?.text);
 
-  const activeImage = computed(() => {
-    if (gameStore.gameOverData?.image) {
-      return gameStore.gameOverData.image;
-    }
-    const images = {
-      success: '',
-      failure: 'game-over-failure.jpg',
-      neutrality: ''
-    };
-    return '/assets/images/' + images[gameStore.gameOverData?.type || 'failure'];
-  });
+  const activeImage = computed(() => gameStore.gameOverData?.image);
 
-  const contentStyleWithType = computed(() => {
-    const classes = {
-      success: '',
-      failure: 'relative top-32',
-      neutrality: ''
-    };
-
-    return classes[gameStore.gameOverData?.type || 'failure'];
-  });
+  const textStyle = computed(() => gameStore.gameOverData?.textStyle);
 
   const onRestartGame = () => {
     gameStore.reset();

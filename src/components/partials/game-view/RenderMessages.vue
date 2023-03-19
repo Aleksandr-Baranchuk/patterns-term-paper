@@ -1,5 +1,7 @@
 <template>
-  <p class="text-3xl font-bold shadow-black mb-12 drop-shadow-2xl">
+  <component
+    :is="tag"
+    class="shadow-black drop-shadow-2xl">
     <template v-if="isStringMassages">{{ prepareMassages }}</template>
     <template v-else>
       <span
@@ -9,12 +11,14 @@
         <br />
       </span>
     </template>
-  </p>
+  </component>
 </template>
 <script lang="ts" setup>
   import usePrepareMessageWithName from '~/composables/usePrepareMessageWithName';
 
-  const props = defineProps<{ messages: string | string[] }>();
+  const props = withDefaults(defineProps<{ messages: string | string[]; tag?: string }>(), {
+    tag: 'p'
+  });
   const isStringMassages = computed(() => isString(props.messages));
   const prepareMassages = usePrepareMessageWithName(props, 'messages');
 </script>

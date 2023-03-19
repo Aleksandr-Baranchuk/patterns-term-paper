@@ -1,6 +1,7 @@
 <template>
   <render-messages
     :key="renderKey"
+    class="text-3xl mb-12 font-bold text-white"
     :class="activeMessageClasses"
     :messages="activeMessage" />
 </template>

@@ -6,13 +6,9 @@ export type Keyable<T = any> = {
 
 export type GameOver = {
   text: string | string[];
-} & (
-  | {
-      type: 'success' | 'neutrality' | 'failure';
-      image?: never;
-    }
-  | { type?: never; image: string }
-);
+  textStyle?: string;
+  image: string;
+};
 
 type GameAnswerActions = {
   setHp?: number;
@@ -24,7 +20,7 @@ type GameAnswerActions = {
 };
 
 export type GameAnswer = {
-  text: string;
+  text: string | string[];
 } & GameAnswerActions &
   ({ gameWindowNextId: string; gameOver?: never } | { gameWindowNextId?: never; gameOver: GameOver });
 

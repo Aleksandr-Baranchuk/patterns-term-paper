@@ -3,3 +3,9 @@
     <slot />
   </button>
 </template>
+
+<style scoped>
+  .btn {
+    text-align: inherit;
+  }
+</style>

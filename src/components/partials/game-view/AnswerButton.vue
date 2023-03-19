@@ -2,7 +2,9 @@
   <base-button-slide
     :disabled="disableAnswer"
     @click="onClick">
-    {{ text }}
+    <render-messages
+      tag="span"
+      :messages="text" />
   </base-button-slide>
 </template>
 
@@ -13,6 +15,7 @@
   import useGameStore from '~/store/game';
   import useUserStore from '~/store/user';
   import BaseButtonSlide from '~/components/ui/BaseButtonSlide.vue';
+  import RenderMessages from '~/components/partials/game-view/RenderMessages.vue';
 
   const props = defineProps<{ answer: GameAnswer }>();
 

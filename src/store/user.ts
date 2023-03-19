@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import useGameStore from '~/store/game';
-import { SERVICE_MESSAGES } from '~/globals';
 import setCountWithMin from '~/utils/setCountWithMin';
 
 const initialState = {
@@ -53,8 +52,9 @@ const useUserStore = defineStore(
         hp.value = 0;
 
         gameStore.onGameOver({
-          type: 'failure',
-          text: SERVICE_MESSAGES.gameOverFailure
+          image: '/assets/images/game-over-screen-6.jpg',
+          textStyle: 'mt-auto pb-12',
+          text: ['Ви дуже сильно намагались вижти в цьому суровому світі, але нажаль він переміг вас.']
         });
 
         return false;
