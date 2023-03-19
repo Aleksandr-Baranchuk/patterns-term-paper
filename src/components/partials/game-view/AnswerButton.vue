@@ -1,10 +1,9 @@
 <template>
-  <button
+  <base-button-slide
     :disabled="disableAnswer"
-    class="btn btn-accent max-w-auto h-auto btn-lg"
     @click="onClick">
     {{ text }}
-  </button>
+  </base-button-slide>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +12,7 @@
   import usePrepareMessageWithName from '~/composables/usePrepareMessageWithName';
   import useGameStore from '~/store/game';
   import useUserStore from '~/store/user';
+  import BaseButtonSlide from '~/components/ui/BaseButtonSlide.vue';
 
   const props = defineProps<{ answer: GameAnswer }>();
 

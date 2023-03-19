@@ -1,7 +1,7 @@
-import { Ref } from 'vue-demi';
+import type { Ref } from 'vue';
 
-export type Keyable = {
-  [key: string]: any;
+export type Keyable<T = any> = {
+  [key: string]: T;
 };
 
 export type GameOver = {
@@ -20,21 +20,18 @@ type GameAnswerActions = {
 
 export type GameAnswer = {
   text: string;
-  gameWindowNextId?: string;
-} & GameAnswerActions;
+} & GameAnswerActions &
+  ({ gameWindowNextId: string; gameOver?: never } | { gameWindowNextId?: never; gameOver: GameOver });
 
 export type GameWindow = {
   id: string;
-  title: string | string[];
   image: string;
 
   contentStyle?: string;
 
   textStyle?: string;
   actionStyle?: string;
+} & ({ title: string | string[]; dialogs?: never } | { title?: never; dialogs: string[][] }) &
+  ({ gameWindowNextId: string; answers?: never } | { gameWindowNextId?: never; answers: GameAnswer[] });
 
-  gameWindowNextId?: string;
-  answers: GameAnswer[];
-};
-
-export type MaybeRef<T> = T | Ref<T>;
+export type MaybeRef<T> = Ref<T> | T;

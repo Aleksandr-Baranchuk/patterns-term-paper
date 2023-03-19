@@ -43,7 +43,7 @@ module.exports = {
         singleAttributePerLine: true,
         vueIndentScriptAndStyle: true,
         trailingComma: 'none',
-        printWidth: 180
+        printWidth: 120
       }
     ],
     '@typescript-eslint/no-non-null-asserted-optional-chain': 'off'

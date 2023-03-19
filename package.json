@@ -12,30 +12,30 @@
     "lintfix": "eslint --fix --ext \".ts,.js,.vue\" --ignore-path .gitignore ."
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@nuxtjs/google-fonts": "^3.0.0",
     "@nuxtjs/tailwindcss": "^6.6.0",
-    "@pinia/nuxt": "^0.4.7",
     "@types/node": "^18.15.3",
     "@types/uuid": "^9.0.1",
-    "@vueuse/core": "^9.13.0",
-    "@vueuse/nuxt": "^9.13.0",
-    "daisyui": "^2.51.3",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.4",
+    "sass": "^1.59.2",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@morev/vue-transitions": "^2.3.6",
+    "@pinia/nuxt": "^0.4.7",
+    "@vueuse/core": "^9.13.0",
+    "@vueuse/nuxt": "^9.13.0",
+    "daisyui": "^2.51.3",
     "nuxt": "^3.3.1",
     "nuxt-icon": "^0.3.3",
     "nuxt-lodash": "^2.4.1",
     "pinia-plugin-persistedstate": "^3.1.0",
-    "prettier": "^2.8.4",
-    "sass": "^1.59.2",
     "swiper": "^9.1.0",
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
     "uuid": "^9.0.0"
   }
 }

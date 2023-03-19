@@ -1,16 +1,15 @@
 import { MaybeRef } from '~/types';
-import createStringFromTemplate from '~/utils/createStringFromTemplate';
 import useUserStore from '~/store/user';
 
-const usePrepareMessageWithName = (rawMessage: MaybeRef<string | string[]>) => {
+const usePrepareMessageWithName = (propMessage: MaybeRef<string | string[]> | Readonly<object>, propKey?: string) => {
   const userStore = useUserStore();
+  const message = useProp(propMessage, propKey);
   return computed(() => {
-    const message = unref(rawMessage);
     const params = { userName: useUpperFirst(userStore.userName) };
-    if (isArray(message)) {
-      return message.map((str) => createStringFromTemplate(str, params));
+    if (isArray(message.value)) {
+      return message.value.map((str) => createStringFromTemplate(str, params));
     }
-    return createStringFromTemplate(message, params);
+    return createStringFromTemplate(message.value, params);
   });
 };
 
