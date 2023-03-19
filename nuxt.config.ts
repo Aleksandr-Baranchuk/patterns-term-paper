@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: '', // Todo: add meta
+      title: 'Остання надія гра',
       htmlAttrs: {
         lang: 'en'
       },
