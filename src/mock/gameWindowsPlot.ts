@@ -23,7 +23,7 @@ const gameWindowsPlot: GameWindow[] = [
       {
         text: 'Залишитись на місці, чорт з ним.',
         gameOver: {
-          type: 'failure',
+          image: getImgPath('game-over-screen-1.jpg'),
           text: '{userName}, вибач, але в такі буремні часи не можно бути боягузом. Ти ще не готов йти далі.'
         }
       },
@@ -42,7 +42,7 @@ const gameWindowsPlot: GameWindow[] = [
       'Але хто тоді допоможе Вaм?',
       'Памятайте після важкого шляху і перебуванні на болотах у вас залишилось мало здоровʼя.'
     ],
-    image: getImgPath('screen-2.jpg'),
+    image: getImgPath('screen-2.jpeg'),
     contentStyle: 'max-w-3xl top-24',
     actionStyle: 'my-auto max-w-2xl',
     answers: [
@@ -93,6 +93,7 @@ const gameWindowsPlot: GameWindow[] = [
       {
         text: 'Які ж турботливі, давайте мій кулак допоможе вашим зубам знайти вихід.Влаштувати драку в таверні.',
         setHp: -80,
+        setMoney: 25,
         gameWindowNextId: getUUID('4')
       },
       {
@@ -126,7 +127,7 @@ const gameWindowsPlot: GameWindow[] = [
   },
   {
     id: getUUID('6'),
-    image: getImgPath('screen-5.jpeg'),
+    image: getImgPath('screen-6.jpeg'),
     dialogs: [
       ['Зачинивши двері таверни ви вирішили закурити і подумати, що робити далі.', '-Чорт, десь загубив сірники. '],
       ['До Вас підходить дівчинка і простягає сірники.'],
@@ -153,10 +154,11 @@ const gameWindowsPlot: GameWindow[] = [
         'Допоможи, поки не пізно. Врятуй дівчину від перетворення.'
       ]
     ],
-    image: getImgPath('screen-5.jpeg'),
+    image: getImgPath('screen-7.jpeg'),
     answers: [
       {
-        text: 'А що мені вже втрачати? Згоден.',
+        text: 'А що мені вже втрачати? Згоден. Але ви повинні заплатити мені аванс.',
+        setMoney: 100,
         gameWindowNextId: getUUID('9')
       },
       {
@@ -175,12 +177,12 @@ const gameWindowsPlot: GameWindow[] = [
     id: getUUID('9'),
     title:
       'Врятувати ії може тільки магічний еліксир. У мене його не має. Треба відправлятися в ліс на пошуки чаклунки',
-    image: getImgPath('screen-5.jpeg'),
+    image: getImgPath('screen-9.png'),
     gameWindowNextId: getUUID('12')
   },
   {
     id: getUUID('10'),
-    image: getImgPath('screen-5.jpeg'),
+    image: getImgPath('screen-8.jpg'),
     dialogs: [
       [
         'Треба рухатись далі і якнайшвидше залишити це зловісне поселення.',
@@ -194,10 +196,17 @@ const gameWindowsPlot: GameWindow[] = [
       ],
       ['Тепер мені треба знайти зіля щоб не стати перевертнем, часу обмаль.']
     ],
-    gameWindowNextId: getUUID('12')
+    answers: [
+      {
+        text: 'Відправитись на пошуки зілля',
+        setHp: -20,
+        gameWindowNextId: getUUID('12')
+      }
+    ]
   },
   {
     id: getUUID('12'),
+    image: getImgPath('screen-11.jpg'),
     dialogs: [
       ['Треба шукати річку в лісі.', 'Чаклунка бере свої сили з природних стихій. Там я ії і впіймаю.'],
       [
@@ -210,16 +219,19 @@ const gameWindowsPlot: GameWindow[] = [
         'І просто так ти ії не віддаш?'
       ]
     ],
-    image: getImgPath('screen-5.jpeg'),
     answers: [
       {
         text: 'Я можу застосувати свою магію і примусити чаклунку віддати мені зілля просто так.',
         setMana: -10,
         gameOver: {
-          type: 'success',
+          image: getImgPath('game-over-screen-5.webp'),
           text: [
             '{userName}, вітаю',
-            'Завдяки вашому досвіду і навичка ви - встигли принести зілля і врятували дівчину від обернення на перевертня.'
+            'Завдяки вашому досвіду і навичкам ви - врятували дівчину і успішно подолали всі випробування.',
+            'Настав час отримати свою виногороду!',
+            'Проте батько-невдаха на радощях пропив усі гроші і йому немає, що вам запропонувати.',
+            '',
+            'Ти віддаси мені те, що вже маєш, про що ще не знаєш ...'
           ]
         }
       },
@@ -231,15 +243,14 @@ const gameWindowsPlot: GameWindow[] = [
       {
         text: 'Я впораюсь і без твого дурнуватого зілля',
         gameOver: {
-          type: 'neutrality',
+          image: getImgPath('game-over-screen-2.jpg'),
           text: [
             'Ви ще якийсь час блукали і намагалися роздобути чарівний флакон.',
             'Але час був не навашому боці.',
             'Ви не встиг врятувати ні дівчину ні себе.',
             'Залишаеться тільки чекати на свою участь.',
             'Що ж, це місто саме накликало на себе біду.',
-            'Тепер ріки крові зальють його вулиці і будинки.',
-            'Кінець.'
+            'Тепер ріки крові зальють його вулиці і будинки.'
           ]
         }
       }
@@ -247,7 +258,7 @@ const gameWindowsPlot: GameWindow[] = [
   },
   {
     id: getUUID('13'),
-    image: getImgPath('screen-5.jpeg'),
+    image: getImgPath('screen-12.jpeg'),
     title: 'От тільки тепер треба обрати кого рятувати. Відьмак, хто має перетворитися на монстра? Кого ти врятуеш?',
     answers: [
       {
@@ -259,18 +270,18 @@ const gameWindowsPlot: GameWindow[] = [
         gameOver: {
           text: [
             'Всіх грошей не заробиш, а своя шкіра ближча.',
-            'Дівчинка стає перевертнем і ролзриває на частини місцевих жителів.',
+            'Дівчинка стає перевертнем і розриває на частини місцевих жителів.',
             'Кінець.',
             'Ти - програв. Кожне життя важливе!'
           ],
-          images: ''
+          image: getImgPath('game-over-screen-4.jpg')
         }
       }
     ]
   },
   {
     id: getUUID('14'),
-    image: getImgPath('screen-1.jpg'),
+    image: getImgPath('screen-13.jpeg'),
     dialogs: [
       ['Ура, мер місто тобі безмежно вдячний. Він і усе місто дарує тобі мішок золота.'],
       ['Шкода, що ти не встигнеш ним скористуватися. В тебе залишилось обмаль часу.']
@@ -279,7 +290,7 @@ const gameWindowsPlot: GameWindow[] = [
       {
         text: 'Піти з міста',
         gameOver: {
-          images: '',
+          image: getImgPath('game-over-screen-3.jpeg'),
           text: [
             'О, ні!',
             'Ти не встиг втекти на безпечну відстань від міста.',

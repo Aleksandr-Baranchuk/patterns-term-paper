@@ -3,8 +3,8 @@
     <game-toolbar />
     <swiper
       :slides-per-view="1"
-      :centered-slides="false"
       :slides-per-group-skip="1"
+      :allow-touch-move="false"
       :speed="1000"
       class="main-slider w-screen h-screen relative"
       :modules="modules"

@@ -9,9 +9,9 @@ export type GameOver = {
 } & (
   | {
       type: 'success' | 'neutrality' | 'failure';
-      images?: never;
+      image?: never;
     }
-  | { type?: never; images: string }
+  | { type?: never; image: string }
 );
 
 type GameAnswerActions = {

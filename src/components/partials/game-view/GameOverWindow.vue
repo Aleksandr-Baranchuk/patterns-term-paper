@@ -28,8 +28,8 @@
   const text = computed(() => gameStore.gameOverData?.text);
 
   const activeImage = computed(() => {
-    if (gameStore.gameOverData?.images) {
-      return gameStore.gameOverData.images;
+    if (gameStore.gameOverData?.image) {
+      return gameStore.gameOverData.image;
     }
     const images = {
       success: '',
