@@ -34,8 +34,15 @@
     return userStore.mana + props.answer.setMana < 0;
   });
 
+  const lackOfMoney = computed(() => {
+    if (isNil(props.answer.setMoney)) {
+      return false;
+    }
+    return userStore.money + props.answer.setMoney < 0;
+  });
+
   const disableAnswer = computed(() => {
-    return lackOfHpPoint.value || lackOfMana.value;
+    return lackOfHpPoint.value || lackOfMana.value || lackOfMoney.value;
   });
   const onClick = () => {
     const answer = props.answer;

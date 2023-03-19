@@ -65,7 +65,7 @@ const useGameStore = defineStore(
   },
   {
     persist: {
-      paths: ['activeSlideId', 'gameOverData']
+      paths: ['activeSlideId', 'gameOverData', 'currentDialogIndex']
     }
   }
 );

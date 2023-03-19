@@ -6,7 +6,9 @@
   <div
     class="relative z-10 p-4 max-w-3xl text-center"
     :class="contentStyleWithType">
-    <p class="text-3xl mb-4 text-white drop-shadow-2xl">{{ text }}</p>
+    <render-messages
+      v-if="text"
+      :messages="text" />
     <button
       class="btn btn-accent"
       @click="onRestartGame">
@@ -17,15 +19,18 @@
 
 <script setup lang="ts">
   import useGameStore from '~/store/game';
-  import usePrepareMessageWithName from '~/composables/usePrepareMessageWithName';
   import useUserStore from '~/store/user';
+  import RenderMessages from '~/components/partials/game-view/RenderMessages.vue';
 
   const gameStore = useGameStore();
   const userStore = useUserStore();
 
-  const text = usePrepareMessageWithName(computed(() => gameStore.gameOverData?.text || ''));
+  const text = computed(() => gameStore.gameOverData?.text);
 
   const activeImage = computed(() => {
+    if (gameStore.gameOverData?.images) {
+      return gameStore.gameOverData.images;
+    }
     const images = {
       success: '',
       failure: 'game-over-failure.jpg',

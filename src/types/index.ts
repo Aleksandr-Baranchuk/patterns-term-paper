@@ -5,9 +5,14 @@ export type Keyable<T = any> = {
 };
 
 export type GameOver = {
-  type: 'success' | 'neutrality' | 'failure';
-  text: string;
-};
+  text: string | string[];
+} & (
+  | {
+      type: 'success' | 'neutrality' | 'failure';
+      images?: never;
+    }
+  | { type?: never; images: string }
+);
 
 type GameAnswerActions = {
   setHp?: number;

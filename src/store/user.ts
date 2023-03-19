@@ -42,13 +42,12 @@ const useUserStore = defineStore(
       }
     };
 
-    const setHp = (count: number) => {
+    const setHp = (count: number): boolean => {
       const countHP = count + hp.value;
       if (countHP <= 0) {
         if (hpPotion.value > 0 && confirm('Випти зілля?')) {
           drinkPotion();
-          setHp(count);
-          return;
+          return setHp(count);
         }
 
         hp.value = 0;
