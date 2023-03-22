@@ -44,7 +44,7 @@ const useUserStore = defineStore(
     const setHp = (count: number): boolean => {
       const countHP = count + hp.value;
       if (countHP <= 0) {
-        if (hpPotion.value > 0 && confirm('Випти зілля?')) {
+        if (hpPotion.value > 0 && confirm('Випити зілля?')) {
           drinkPotion();
           return setHp(count);
         }
@@ -54,7 +54,7 @@ const useUserStore = defineStore(
         gameStore.onGameOver({
           image: '/assets/images/game-over-screen-6.jpg',
           textStyle: 'mt-auto pb-12',
-          text: ['Ви дуже сильно намагались вижти в цьому суровому світі, але нажаль він переміг вас.']
+          text: ['Ви дуже сильно намагались вижити в цьому суровому світі, але на жаль він переміг вас.']
         });
 
         return false;
